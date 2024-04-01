@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login/screen/screen_login/LoginWidget.dart';
 
-import 'login_widget/LoginWidget.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -18,10 +19,9 @@ class MyApp extends StatelessWidget {
     return SafeArea(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: LoginWidget(screenWidth: screenWidth, screenHeight: screenHeight),
+        home: LoginWidget(screenWidth: screenWidth, screenHeight: screenHeight)
         ),
-      ),
+
     );
   }
 }
