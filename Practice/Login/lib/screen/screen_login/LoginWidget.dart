@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
+import 'package:login/screen/screen_forgot_password/ForgotPasswordScreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../screen_sign_up/SignUpWidget.dart';
-
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({
@@ -23,6 +23,18 @@ class LoginWidget extends StatefulWidget {
 class _LoginWidgetState extends State<LoginWidget> {
   bool _isPasswordVisible = false;
   bool _isRememberMe = false;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final errorEmail = 'Invalid email address';
+  final errorPassword = 'Invalid password';
+  bool emailInvalid = false;
+  bool passwordInvalid = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedCredentials();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +89,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
+                      // Textfield input email address
+                      controller: _emailController,
+                      style: TextStyle(
+                        fontSize: widget.screenWidth * 0.03,
+                      ),
                       decoration: InputDecoration(
+                        errorText: emailInvalid ? errorEmail : null,
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                             color: Color(0xff245501),
@@ -87,7 +105,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         ),
                         hintText: 'Input your email address',
                         hintStyle: TextStyle(
-                          fontSize: widget.screenWidth * 0.04,
+                          fontSize: widget.screenWidth * 0.03,
                         ),
                         //border: Colors.black,
                         border: OutlineInputBorder(
@@ -115,9 +133,14 @@ class _LoginWidgetState extends State<LoginWidget> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
+                      controller: _passwordController,
                       obscureText: !_isPasswordVisible,
+                      style: TextStyle(
+                        fontSize: widget.screenWidth * 0.03,
+                      ),
                       // Toggle password visibility
                       decoration: InputDecoration(
+                        errorText: passwordInvalid ? errorPassword : null,
                         hintText: 'Input your password',
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
@@ -127,7 +150,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         hintStyle: TextStyle(
-                          fontSize: widget.screenWidth * 0.04,
+                          fontSize: widget.screenWidth * 0.03,
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
@@ -180,10 +203,15 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ],
                         ),
                       ),
-                      Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontSize: widget.screenWidth * 0.035,
+                      GestureDetector(
+                        onTap: () {
+                          onTapForgotPassword();
+                        },
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontSize: widget.screenWidth * 0.035,
+                          ),
                         ),
                       ),
                     ],
@@ -194,7 +222,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     height: widget.screenHeight * 0.08,
                     child: ElevatedButton(
                       onPressed: () {
-                        print('Login');
+                        onPressedLoginButton();
                       },
                       child: Text(
                         'Log In',
@@ -235,5 +263,64 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
       ),
     );
+  }
+
+  void onTapForgotPassword() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ForgotPasswordScreen(
+                screenWidth: widget.screenWidth,
+                screenHeight: widget.screenHeight)));
+  }
+
+  void onPressedLoginButton() {
+    setState(() {
+      emailInvalid = !isValidEmail(_emailController.text) ? true : false;
+      passwordInvalid =
+          !isValidPassword(_passwordController.text) ? true : false;
+      if (!emailInvalid && !passwordInvalid) {
+        logIn();
+      }
+      ;
+    });
+  }
+
+  bool isValidEmail(String email) {
+    return RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(email ?? '');
+  }
+
+  bool isValidPassword(String password) {
+    // Kiểm tra xem password có null không và có ít nhất 8 ký tự không
+    return password != null && password.length >= 8;
+  }
+
+  void logIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("///////////////////");
+    print('Email: ${_emailController.text}');
+    print('Password: ${_passwordController.text}');
+    if (_emailController.text == 'chucthien2@gmail.com' &&
+        _passwordController.text == '12345678') {
+      print('Login success');
+      if(_isRememberMe){
+        await prefs.setString('email', _emailController.text);
+        await prefs.setString('password', _passwordController.text);
+        print('Save email and password');
+      }
+    } else {
+      print('Login failed');
+    }
+  }
+
+
+  //Lấy thông tin đăng nhập từ SharedPreferences
+  _loadSavedCredentials() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _emailController.text = prefs.getString('email') ?? '';
+      _passwordController.text = prefs.getString('password') ?? '';
+      _isRememberMe = _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+    });
   }
 }

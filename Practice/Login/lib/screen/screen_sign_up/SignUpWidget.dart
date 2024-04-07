@@ -74,14 +74,16 @@ class _LoginWidgetState extends State<SignUpWidget> {
                               ),
                               Container(
                                 width: (widget.screenWidth -
-                                        widget.screenWidth * 0.08) /
-                                    2,
+                                        widget.screenWidth * 0.08) / 2,
                                 height: widget.screenHeight * 0.07,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: TextField(
+                                child: TextField( //Textfield input first name
+                                  style: TextStyle(
+                                    fontSize: widget.screenWidth * 0.03,
+                                  ),
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
@@ -92,7 +94,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
                                     ),
                                     hintText: 'Input first name',
                                     hintStyle: TextStyle(
-                                      fontSize: widget.screenWidth * 0.04,
+                                      fontSize: widget.screenWidth * 0.03,
                                     ),
                                     //border: Colors.black,
                                     border: OutlineInputBorder(
@@ -128,7 +130,10 @@ class _LoginWidgetState extends State<SignUpWidget> {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: TextField(
+                                child: TextField( //Textfield input last name
+                                  style: TextStyle(
+                                    fontSize: widget.screenWidth * 0.03,
+                                  ),
                                   decoration: InputDecoration(
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
@@ -139,7 +144,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
                                     ),
                                     hintText: 'Input last name',
                                     hintStyle: TextStyle(
-                                      fontSize: widget.screenWidth * 0.04,
+                                      fontSize: widget.screenWidth * 0.03,
                                     ),
                                     //border: Colors.black,
                                     border: OutlineInputBorder(
@@ -176,7 +181,10 @@ class _LoginWidgetState extends State<SignUpWidget> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: TextField(
+                    child: TextField( //Textfield input email address
+                      style: TextStyle(
+                        fontSize: widget.screenWidth * 0.03,
+                      ),
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
@@ -187,7 +195,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
                         ),
                         hintText: 'Input your email address',
                         hintStyle: TextStyle(
-                          fontSize: widget.screenWidth * 0.04,
+                          fontSize: widget.screenWidth * 0.03,
                         ),
                         //border: Colors.black,
                         border: OutlineInputBorder(
@@ -218,7 +226,10 @@ class _LoginWidgetState extends State<SignUpWidget> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: TextField(
+                    child: TextField( //Textfield input password
+                      style: TextStyle(
+                        fontSize: widget.screenWidth * 0.03,
+                      ),
                       obscureText: !_isPasswordVisible,
                       // Toggle password visibility
                       decoration: InputDecoration(
@@ -231,7 +242,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
                           borderRadius: BorderRadius.circular(5),
                         ),
                         hintStyle: TextStyle(
-                          fontSize: widget.screenWidth * 0.04,
+                          fontSize: widget.screenWidth * 0.03,
                         ),
                         suffixIcon: IconButton(
                           icon: Icon(
