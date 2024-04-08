@@ -36,7 +36,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
           child: SingleChildScrollView(
             child: Container(
               width: widget.screenWidth * 0.9,
-              height: widget.screenHeight * 0.8,
+              height: widget.screenHeight * 0.9,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -85,6 +85,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
                                     fontSize: widget.screenWidth * 0.03,
                                   ),
                                   decoration: InputDecoration(
+
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                         color: Color(0xff245501),
@@ -123,18 +124,18 @@ class _LoginWidgetState extends State<SignUpWidget> {
                               ),
                               Container(
                                 width: (widget.screenWidth -
-                                        widget.screenWidth * 0.08) /
-                                    2,
+                                    widget.screenWidth * 0.08) / 2,
                                 height: widget.screenHeight * 0.07,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(5),
                                 ),
-                                child: TextField( //Textfield input last name
+                                child: TextField( //Textfield input first name
                                   style: TextStyle(
                                     fontSize: widget.screenWidth * 0.03,
                                   ),
                                   decoration: InputDecoration(
+
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: const BorderSide(
                                         color: Color(0xff245501),
@@ -154,7 +155,7 @@ class _LoginWidgetState extends State<SignUpWidget> {
                                 ),
                               ),
                             ]),
-                      )
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -262,6 +263,8 @@ class _LoginWidgetState extends State<SignUpWidget> {
                       ),
                     ),
                   ),
+
+
                   SizedBox(height: widget.screenHeight * 0.02),
 
                   //Button sign up

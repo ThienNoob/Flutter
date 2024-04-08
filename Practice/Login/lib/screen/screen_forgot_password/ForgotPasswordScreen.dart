@@ -54,7 +54,7 @@ class _LoginWidgetState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                   Text(
-                    'There is nothing to worry about, we\'ll send you a message to help you reset your password.',
+                    'There is nothing to worry about, we will send you a message to help you reset your password.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: widget.screenWidth * 0.04,
@@ -84,20 +84,22 @@ class _LoginWidgetState extends State<ForgotPasswordScreen> {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: TextField(
+
                       style: TextStyle(
                         fontSize: widget.screenWidth * 0.04,
                       ),
                       decoration: InputDecoration(
+
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(
                             color: Color(0xff245501),
-                            width: 2,
+                            //width: 2,
                           ),
                           borderRadius: BorderRadius.circular(5),
                         ),
                         hintText: 'Input your email address',
                         hintStyle: TextStyle(
-                          fontSize: widget.screenWidth * 0.04,
+                          fontSize: widget.screenWidth * 0.035,
                         ),
                         //border: Colors.black,
                         border: OutlineInputBorder(
